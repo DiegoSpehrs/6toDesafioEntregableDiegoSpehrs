@@ -1,5 +1,5 @@
 import passport from "passport";
-import { userModel } from '../db/models/users.model.js'
+import { usersModel } from '../db/models/users.model.js'
 import { Strategy as LocalStrategy } from 'passport-local'
 import { Strategy as GithubStrategy } from "passport-github2";
 import { userMongo } from "../managers/users/usersMongo.js";
@@ -56,7 +56,7 @@ passport.serializeUser((user,done)=>{
 
 passport.deserializeUser(async(id,done)=>{
     try {
-      const user = await userModel.findByID(id)
+      const user = await usersModel.findByID(id)
       done(null,user)  
     } catch (error) {
         done(error)

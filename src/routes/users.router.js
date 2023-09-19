@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {userMongo} from '../managers/users/usersMongo.js';
-import {hashData} from '../utils.js'
+import {hashData} from '../utils.js';
 import passport from "passport";
 
 const router = new Router();
