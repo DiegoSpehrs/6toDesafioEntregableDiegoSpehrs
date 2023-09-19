@@ -38,6 +38,7 @@ passport.use(new GithubStrategy({
                 first_name: profile.displayName.split(' ')[0],
                 last_name: profile.displayName.split(' ')[1],
                 username: profile.username,
+                email: profile.email,
                 password: ' '
             }
             const result = await userMongo.createUser(newUser)
