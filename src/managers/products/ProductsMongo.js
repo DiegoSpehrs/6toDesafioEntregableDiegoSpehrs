@@ -3,7 +3,7 @@ import {productsModel} from '../../db/models/porducts.model.js';
 class ProductsMongo{
     async getProducts(limit,page,sort){
         try {
-          if(!limit,!page,!sort){
+          if(!limit || !page || !sort){
             limit = 10;
             page = 1;
             sort = ASC;
@@ -13,7 +13,7 @@ class ProductsMongo{
          )
          console.log(result)
          const info = {
-           //status: ,//no se si hacerlo con un custom return o si hay un return de default que lo devuelve
+           //status: //no se si hacerlo con un custom return o si hay un return de default que lo devuelve
            payload: result.docs,
            totalPages: result.totalPages,
            prevPage: result.prevPage,
