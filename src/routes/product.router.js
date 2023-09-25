@@ -5,8 +5,7 @@ const router = Router()
 
 router.get('/',async(req,res)=>{
     try {
-      const {limit,page,sort} = req.query
-      const products = await productMongo.getProducts(limit,page,sort)
+      const products = await productMongo.getProducts(req.query)
       res.status(200).json({products})
 
     } catch (error) {

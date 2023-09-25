@@ -1,19 +1,20 @@
 import {productsModel} from '../../db/models/porducts.model.js';
 
+
 class ProductsMongo{
-    async getProducts(limit,page,sort){
-        try {
-          if(!limit || !page || !sort){
-            limit = 10;
-            page = 1;
-            sort = ASC;
-          }
-         const result = await productsModel.paginate(
-          {limit,page,sort}
+    async getProducts(obj){
+      const {limit,page,...query} = obj
+      console.log(query);
+
+      try {
+          
+           const result = await productsModel.paginate(
+           query,
+           {limit , page}
          )
-         console.log(result)
-         const info = {
-           //status: //no se si hacerlo con un custom return o si hay un return de default que lo devuelve
+          
+          const info = {
+          
            payload: result.docs,
            totalPages: result.totalPages,
            prevPage: result.prevPage,
@@ -24,6 +25,7 @@ class ProductsMongo{
            prevLink: `http://localhost:8080/api/products?page=${result.prevPageage}`,
            nextLink: `http://localhost:8080/api/products?page=${result.nextPageage}`
          }
+         console.log(info);
          return {info}
         } catch (error) {
           return error
