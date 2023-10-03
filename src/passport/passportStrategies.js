@@ -28,7 +28,8 @@ passport.use(new GithubStrategy({
     clientSecret: 'b2b82517bcdeba86c0e2342e32bb0af17001b879',
     callbackURL: "http://localhost:8080/api/users/github"
 },
-    async function (accessToken, refreshToken, done) {
+    async function (accessToken, refreshToken, profile, done) {
+        console.log(profile)
         try {
             const userDb = await userMongo.findUser(profile.username)
             if (userDb) {
@@ -41,6 +42,7 @@ passport.use(new GithubStrategy({
                 email: profile.email,
                 password: ' '
             }
+            console.log(newUser)
             const result = await userMongo.createUser(newUser)
             return done(null, result)
         } catch (error) {
@@ -50,6 +52,7 @@ passport.use(new GithubStrategy({
 ))
 
 passport.serializeUser((user,done)=>{
+    console.log(user)
     done(null,user._id)
 })
 
