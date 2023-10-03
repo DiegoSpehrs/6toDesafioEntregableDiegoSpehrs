@@ -3,7 +3,7 @@ import {productsModel} from '../../db/models/porducts.model.js';
 
 class ProductsMongo{
     async getProducts(obj){
-      const {limit,page,...query} = obj
+      const {limit=10 ,page=1 ,...query} = obj
       console.log(query);
 
       try {
@@ -22,8 +22,8 @@ class ProductsMongo{
            page: result.page,
            hasPrevPage: result.hasPrevPage,
            hasNextPage: result.hasNextPage,
-           prevLink: `http://localhost:8080/api/products?page=${result.prevPageage}`,
-           nextLink: `http://localhost:8080/api/products?page=${result.nextPageage}`
+           prevLink: `http://localhost:8080/api/products?page=${result.prevPage}`,
+           nextLink: `http://localhost:8080/api/products?page=${result.nextPage}`
          }
          console.log(info);
          return {info}
