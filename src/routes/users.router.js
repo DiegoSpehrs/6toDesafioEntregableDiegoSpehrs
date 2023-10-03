@@ -30,10 +30,12 @@ router.get('/home',async (req, res) => {
         }
 })
 
-router.get('/githubSignup',passport.authenticate('github',{scope: ['user:email']}))
+router.get('/githubSignup',passport.authenticate('github',{scope: ['user:email']}),(req,res) => {
+    res.redirect('/api/users//github')
+})
 
 router.get('/github',passport.authenticate('github',{failureRedirect:'/api/views'}),(req,res)=>{
-    res.send('Bienvenido desde github')
+    //res.redirect('/api/users//github')
 })
 
 export default router
