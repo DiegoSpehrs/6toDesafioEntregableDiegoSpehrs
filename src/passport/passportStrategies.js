@@ -35,11 +35,12 @@ passport.use(new GithubStrategy({
             if (userDb) {
                 return done(null, false)
             }
+            console.log(profile._json.email);
             const newUser = {
                 first_name: profile.displayName.split(' ')[0],
                 last_name: profile.displayName.split(' ')[1],
                 username: profile.username,
-                email: profile.email,
+                email: profile._json.email,
                 password: ' '
             }
             console.log(newUser)

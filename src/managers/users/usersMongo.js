@@ -8,10 +8,12 @@ class UsersMongo{
           if(filterAdmin === user.email){
           user.isAdmin = true  
           const newUser = await usersModel.create(user)
+          return newUser  
           }else{
           const newUser = await usersModel.create(user)
-          }
           return newUser  
+          }
+           
         } catch (error) {
             return error
         }

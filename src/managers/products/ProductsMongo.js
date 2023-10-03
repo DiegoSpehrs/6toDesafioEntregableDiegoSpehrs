@@ -4,7 +4,7 @@ import {productsModel} from '../../db/models/porducts.model.js';
 class ProductsMongo{
     async getProducts(obj){
       const {limit=10 ,page=1 ,...query} = obj
-      console.log(query);
+      console.log(query, limit, page);
 
       try {
           
