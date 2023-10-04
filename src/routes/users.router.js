@@ -22,7 +22,9 @@ router.post('/singup',async (req, res) => {
 
 router.get('/home',async (req, res) => {
         const {username} = req.session
+        console.log(username)
         const userDB = await userMongo.findUser(username)
+        console.log(userDB)
         if(userDB.isAdmin){
             res.redirect('/api/views/adminHome')
         }else{
@@ -32,10 +34,13 @@ router.get('/home',async (req, res) => {
 
 router.get('/githubSignup',passport.authenticate('github',{scope: ['user:email']}))
 
-router.get('/github',passport.authenticate('github',{failureRedirect:'/api/views'}),(req,res)=>{
+router.get('/github',passport.authenticate('github',{failureRedirect:'/api/views/singup'}),(req,res)=>{
+    console.log(req)
     //esto es como trate de correjir el erro pero no estaria funcionando, sospecho que algo me falta y no se muy bien que.
     req.session['username'] = req.user.username
     res.redirect('/home')
 })
+
+
 
 export default router

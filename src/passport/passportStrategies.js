@@ -29,13 +29,12 @@ passport.use(new GithubStrategy({
     callbackURL: "http://localhost:8080/api/users/github"
 },
     async function (accessToken, refreshToken, profile, done) {
-        console.log(profile)
         try {
             const userDb = await userMongo.findUser(profile.username)
+            console.log(userDb)
             if (userDb) {
                 return done(null, false)
             }
-            console.log(profile._json.email);
             const newUser = {
                 first_name: profile.displayName.split(' ')[0],
                 last_name: profile.displayName.split(' ')[1],
@@ -43,7 +42,6 @@ passport.use(new GithubStrategy({
                 email: profile._json.email,
                 password: ' '
             }
-            console.log(newUser)
             const result = await userMongo.createUser(newUser)
             return done(null, result)
         } catch (error) {
