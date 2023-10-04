@@ -31,7 +31,6 @@ passport.use(new GithubStrategy({
     async function (accessToken, refreshToken, profile, done) {
         try {
             const userDb = await userMongo.findUser(profile.username)
-            console.log(userDb)
             if (userDb) {
                 return done(null, false)
             }
@@ -51,14 +50,13 @@ passport.use(new GithubStrategy({
 ))
 
 passport.serializeUser((user,done)=>{
-    console.log(user)
     done(null,user._id)
 })
 
 
 passport.deserializeUser(async(id,done)=>{
     try {
-      const user = await usersModel.findByID(id)
+      const user = await usersModel.findById(id)
       done(null,user)  
     } catch (error) {
         done(error)

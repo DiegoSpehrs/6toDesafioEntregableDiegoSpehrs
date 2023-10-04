@@ -6,6 +6,7 @@ import cartsRouter from './routes/cart.router.js';
 import viewsRouter from './routes/views.router.js';
 import loginRouter from './routes/login.router.js';
 import usersRouter from './routes/users.router.js';
+import homeRouter from './routes/home.router.js';
 import { Server } from 'socket.io';
 import { productMongo } from './managers/products/ProductsMongo.js';
 import './db/dbConfig.js';
@@ -45,6 +46,7 @@ app.use('/api/cart',cartsRouter)
 app.use('/api/views',viewsRouter)
 app.use('/api/login',loginRouter)
 app.use('/api/users',usersRouter)
+app.use('/api/home',homeRouter)
 
 const PORT = 8080
 
