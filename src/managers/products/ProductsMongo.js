@@ -23,7 +23,7 @@ class ProductsMongo{
            prevLink: `http://localhost:8080/api/products?page=${result.prevPage}`,
            nextLink: `http://localhost:8080/api/products?page=${result.nextPage}`
          }
-         console.log(info);
+         
          return {info}
         } catch (error) {
           return error
